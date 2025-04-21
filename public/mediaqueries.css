@@ -1,0 +1,109 @@
+/* Responsividades */
+
+@media screen and (max-width: 1400px){
+    #perfil{
+        height: 83vh;
+        margin-bottom: 6rem;
+    }
+    .sobre-containers{
+        flex-wrap: wrap;
+    }
+    #contatos, #projetos{
+        height: fit-content;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    #desktop-nav{
+        display: none; /* Quando a tela fica menor que 1200px, desktop-nav vai desaparecer */
+    }
+    #hamburger-nav{
+        display: flex;
+    }
+    #habilidade, .habilidade-detalhes-container{
+        margin-top: 2rem;
+    }
+    #perfil, .seção-container{
+        display: block;
+    }
+    .arrow{
+        display: none;
+    }
+    section, .seção-container{
+        height: fit-content;
+    }
+    section{
+        margin: 0 5%;
+    }
+    .seção-fotos-container, .foto-sobre{
+        width: 275px;
+        height: 275px;
+        margin: 0 auto 2rem;
+    }
+    .sobre-containers{
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 600px){
+    #contato, footer {
+        height: 40vh;
+    }
+    #perfil{
+        height: 83vh;
+        margin-bottom: 0;
+    }
+    #sobre, #habilidade, #projetos, #certificados{
+        margin-bottom: 0;
+    }
+    article{
+        font-size: 1rem;
+    }
+    footer nav{
+        height: fit-content;
+        margin-bottom: 2rem;
+    }
+    .contato-info-upper-container, .btn-container{
+        flex-wrap: wrap;
+    }
+    .sobre-containers{
+        flex-direction: column;
+    }
+    .seção-texto, .seção-fotos-container{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+    }
+    .contato-info-container{
+        margin: 0;
+    }
+    .contato-info-container p, .nav-links li a{
+        font-size: 1rem;
+    }
+    .habilidade-sub-título{
+        font-size: 1.25rem;
+    }
+    .logo{
+        font-size: 1.5rem;
+    }
+    .nav-links{
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    .seção-fotos-container img{
+        width: 100%;
+        height: auto;
+        justify-content: center;
+    }
+    .seção-texto-p2{
+        font-size: 1.25rem;
+    }
+    .título{
+        font-size: 2rem;
+    }
+    .texto-container{
+        text-align: justify;
+    }
+}

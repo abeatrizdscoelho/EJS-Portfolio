@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+  <head>
+    <%- include("partials/header") %>
+    <title>Projetos</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include("partials/navbar") %>
+
+    <main>
+        <section id="projetos">
+            <p class="seção-texto-p1">Navegue em Meus Recentes</p>
+            <h1 class="título">Projetos</h1>
+            <div class="habilidade-detalhes-container">
+              <div class="sobre-containers">
+      
+                <% projetos.forEach(proj => { %>
+                  <div class="detalhes-container color-container">
+                    <div class="article-container">
+                      <img src="<%= proj.imagem %>" alt="<%= proj.titulo %>" class="projeto-img">
+                    </div>
+                    <h2 class="habilidade-sub-título projeto-título"><%= proj.titulo %></h2>
+                    <p class="seção-texto-p1 seção-texto-projeto"><%- proj.descricao %></p>
+                    <div class="btn-container">
+                      <button class="btn btn-color-2" onclick="location.href='<%= proj.github %>'">GitHub</button>
+                      <button class="btn btn-color-2" onclick="location.href='<%= proj.demo %>'">Live Demo</button>
+                    </div>
+                  </div>
+                <% }) %>
+      
+              </div>
+            </div>
+          </section>
+    </main>
+  </body>
+</html>

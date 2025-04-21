@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<section id="perfil">
+  <div class="seção-fotos-container">
+    <img src="/assets/Foto de Perfil.png" alt="Foto de Perfil" class="foto-sobre" />
+  </div>
+  <div class="seção-texto">
+    <p class="seção-texto-p1">Olá, sou</p>
+    <h1 class="título">Ana Beatriz</h1>
+    <p class="seção-texto-p2">Desenvolvedora Full Stack</p>
+    <div class="btn-container">
+      <button class="btn btn-color-2" onclick="window.open('/assets/Currículo Ana Beatriz Coelho.pdf')">Currículo</button>
+      <button class="btn btn-color-1" onclick="location.href='/contato'">Contato</button>
+    </div>
+    <div id="socials-container">
+        <img src="./assets/linkedin.png" alt="Meu Perfil LinkedIn" class="icon" onclick="location.href='https://www.linkedin.com/in/abeatrizcoelho/'"/>
+        <img src="./assets/github.png" alt="Meu Perfil GitHub" class="icon" onclick="location.href='https://github.com/abeatrizdscoelho'"/>
+    </div>
+  </div>
+</section>

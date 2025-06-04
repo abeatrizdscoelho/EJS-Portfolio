@@ -102,6 +102,137 @@ app.delete('/projetos/:id', (req, res) => {
   });
 });
 
+
+//CRUD de Tecnologias
+
+//CREATE
+app.post('/tecnologias', (req, res) => {
+  const { nome, categoria } = req.body;
+  const novaTecnologia = 'INSERT INTO tecnologias (tec_nome, tec_categoria) VALUES (?, ?)';
+  db.query(novaTecnologia, [nome, categoria], (err, result) => {
+    if (err) return res.status(500).send(err);
+
+    const idTecnologia = result.insertId;
+    res.send({ idTecnologia, nome, categoria })
+  });
+});
+
+
+//READ
+app.get('/tecnologias', (req, res) => {
+  const query = 'SELECT tec_id, tec_nome, tec_categoria FROM tecnologias';
+  db.query(query, (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.send(results);
+  });
+});
+
+//READ por Projeto
+app.get('/tecnologias/projetos', (req, res) => {
+  db.query(`SELECT t.tec_id, t.tec_nome, t.tec_categoria, GROUP_CONCAT(p.proj_titulo SEPARATOR ', ') AS projetos FROM tecnologias t LEFT JOIN tecnologiasProjeto tp ON t.tec_id = tp.idTecnologia LEFT JOIN projetos p ON tp.idProjeto = p.proj_id GROUP BY t.tec_id`, (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.send(results);
+  });
+});
+
+//READ por ID de Projeto
+app.get('/projetos/:id/tecnologias', (req, res) => {
+  const idProjeto = req.params.id;
+  const query = `SELECT t.tec_id, t.tec_nome, t.tec_categoria FROM tecnologias t JOIN tecnologiasProjeto tp ON t.tec_id = tp.idTecnologia WHERE tp.idProjeto = ?`;
+  db.query(query, [idProjeto], (err, results) => {
+    if (err) return res.status(500).send(err);
+
+    if (results.length === 0) return res.status(404).send({ mensagem: 'Nenhuma tecnologia encontrada para este projeto.' });
+    res.send(results);
+  });
+});
+
+//UPDATE
+app.put('/tecnologias/:id', (req, res) => {
+  const { nome, categoria } = req.body;
+  const idTecnologia = req.params.id;
+
+  const atualizarTecnologia = 'UPDATE tecnologias SET tec_nome = ?, tec_categoria = ? WHERE tec_id = ?';
+  db.query(atualizarTecnologia, [nome, categoria, idTecnologia], (err) => {
+    if (err) return res.status(500).send(err);
+    res.send({ mensagem: 'Tecnologia atualizada com sucesso!' });
+  });
+});
+
+//DELETE
+app.delete('/tecnologias/:id', (req, res) => {
+  const idTecnologia = req.params.id
+
+  const removerRelacionamentos = 'DELETE FROM tecnologiasProjeto WHERE idTecnologia = ?';
+  db.query(removerRelacionamentos, [idTecnologia], (err) => {
+    if (err) return res.status(500).send(err);
+
+    db.query('DELETE FROM tecnologias WHERE tec_id = ?', [idTecnologia], (err) => {
+      if (err) return res.status(500).send(err);
+      res.send({ mensagem: 'Tecnologia excluída com sucesso!' });
+    });
+  });
+});
+
+
+//CRUD de Certificados
+
+//CREATE
+app.post('/certificados', (req, res) => {
+  const { titulo, descricao } = req.body;
+  const novoCertificado = 'INSERT INTO certificados (cert_titulo, cert_descricao) VALUES (?, ?)';
+  db.query(novoCertificado, [titulo, descricao], (err, result) => {
+    if (err) return res.status(500).send(err);
+
+    const idCertificado = result.insertId;
+    res.send({ idCertificado, titulo, descricao })
+  });
+});
+
+//READ
+app.get('/certificados', (req, res) => {
+  const query = 'SELECT cert_id, cert_titulo, cert_descricao FROM certificados';
+  db.query(query, (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.send(results);
+  });
+});
+
+//READ por ID 
+app.get('/certificados/:id', (req, res) => {
+  const idCertificado = req.params.id;
+  const query = `SELECT cert_id, cert_titulo, cert_descricao FROM certificados WHERE cert_id = ?`;
+  db.query(query, [idCertificado], (err, results) => {
+    if (err) return res.status(500).send(err);
+
+    if (results.length === 0) return res.status(404).send({ mensagem: 'Nenhum certificado encontrado para esse ID.' });
+    res.send(results[0]);
+  });
+});
+
+//UPDATE
+app.put('/certificados/:id', (req, res) => {
+  const { titulo, descricao } = req.body;
+  const idCertificado = req.params.id;
+
+  const atualizarCertificado = 'UPDATE certificados SET cert_titulo = ?, cert_descricao = ? WHERE cert_id = ?';
+  db.query(atualizarCertificado, [titulo, descricao, idCertificado], (err) => {
+    if (err) return res.status(500).send(err);
+    res.send({ mensagem: 'Certificado atualizado com sucesso!' });
+  });
+});
+
+//DELETE
+app.delete('/certificados/:id', (req, res) => {
+  const idCertificado = req.params.id
+
+  db.query('DELETE FROM certificados WHERE cert_id = ?', [idCertificado], (err) => {
+    if (err) return res.status(500).send(err);
+    res.send({ mensagem: 'Certificado excluído com sucesso!' });
+  });
+});
+
+
 // app.set('view engine', 'ejs');
 // app.set('views', path.join(__dirname, 'views'));
 // app.use(express.static(path.join(__dirname, 'public')));

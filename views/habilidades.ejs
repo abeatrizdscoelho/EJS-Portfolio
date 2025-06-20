@@ -2,39 +2,41 @@
 <html lang="pt-br">
 
 <head>
-    <%- include("partials/header") %>
-        <title>Habilidades</title>
-        <link rel="stylesheet" href="/style.css" />
+  <%- include("partials/header") %>
+    <title>Habilidades</title>
+    <link rel="stylesheet" href="/style.css" />
 </head>
 
 <body>
-    <%- include("partials/navbar") %>
+  <%- include("partials/navbar") %>
 
-        <main>
-            <section id="habilidades">
-                <p class="seção-texto-p1">Explore Minhas</p>
-                <h1 class="título">Habilidades</h1>
-                <div class="habilidade-detalhes-container">
-                  <div class="sobre-containers">
-                    <% habilidades.forEach((area) => { %>
-                      <div class="detalhes-container">
-                        <h2 class="habilidade-sub-título"><%= area.categoria %></h2>
-                        <div class="article-container">
-                          <% area.itens.forEach((habilidade) => { %>
-                            <article>
-                              <img src="<%= habilidade.icone %>" alt="Icon Habilidade" class="icon">
-                              <div>
-                                <h3><%= habilidade.nome %></h3>
-                                <p><%= habilidade.nivel %></p>
-                              </div>
-                            </article>
-                          <% }) %>
-                        </div>
+    <main>
+      <section id="habilidades">
+        <p class="seção-texto-p1">Explore Minhas</p>
+        <h1 class="título">Habilidades</h1>
+        <div class="habilidade-detalhes-container">
+          <div class="sobre-containers">
+            <% habilidades.forEach((area)=> { %>
+              <div class="detalhes-container">
+                <h2 class="habilidade-sub-título">
+                  <%= area.categoria %>
+                </h2>
+                <div class="article-container">
+                  <% area.itens.forEach((habilidade)=> { %>
+                    <article>
+                      <img src="<%= habilidade.icone %>" alt="Icon Habilidade" class="icon">
+                      <div>
+                        <h3><%= habilidade.nome %></h3>
+                        <p><%= habilidade.nivel %></p>
                       </div>
+                    </article>
                     <% }) %>
-                  </div>
                 </div>
-              </section>
-        </main>
+              </div>
+              <% }) %>
+          </div>
+        </div>
+      </section>
+    </main>
 </body>
 </html>

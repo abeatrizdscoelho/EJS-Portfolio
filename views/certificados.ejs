@@ -1,35 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-  <head>
-    <%- include("partials/header") %>
+<head>
+  <%- include("partials/header") %>
     <title>Certificados</title>
     <link rel="stylesheet" href="/style.css" />
-  </head>
-  <body>
-    <%- include("partials/navbar") %>
+</head>
+
+<body>
+  <%- include("partials/navbar") %>
 
     <main>
-        <section id="certificados">
-            <p class="seção-texto-p1">Veja Sobre Meus</p>
-            <h1 class="título">Certificados</h1>
-            <div class="habilidade-detalhes-container">
-              <div class="sobre-containers">
-                <% certificados.forEach(certificado => { %>
-                  <div class="detalhes-container color-container">
-                    <div class="article-container">
-                      <img src="<%= certificado.imagem %>" alt="Certificado" class="certificado-img">
-                    </div>
-                    <h2 class="habilidade-sub-título certificado-título"><%= certificado.titulo %></h2>
-                    <p class="seção-texto-p1 seção-texto-projeto"><%= certificado.descricao %></p>
-                    <div class="btn-container">
-                      <button class="btn btn-color-2" onclick="window.open('<%= certificado.pdf %>')">Ver Mais</button>
-                    </div>
-                  </div>
-                <% }); %>
+      <section id="certificados">
+        <p class="seção-texto-p1">Veja Sobre Meus</p>
+        <h1 class="título">Certificados</h1>
+        <div class="habilidade-detalhes-container">
+          <div class="sobre-containers">
+            <% certificados.forEach(certificado=> { %>
+              <div class="detalhes-container color-container">
+                <div class="article-container">
+                  <img src="<%= certificado.cert_imagem %>" alt="Certificado" class="certificado-img">
+                </div>
+                <h2 class="habilidade-sub-título certificado-título"><%= certificado.cert_titulo %></h2>
+                <p class="seção-texto-p1 seção-texto-projeto"><%= certificado.cert_descricao %></p>
               </div>
-            </div>
-          </section>
+              <% }); %>
+          </div>
+        </div>
+      </section>
     </main>
-  </body>
+</body>
+
 </html>

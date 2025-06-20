@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-  <head>
-    <%- include("partials/header") %>
+<head>
+  <%- include("partials/header") %>
     <title>Projetos</title>
     <link rel="stylesheet" href="/style.css" />
-  </head>
-  <body>
-    <%- include("partials/navbar") %>
+</head>
+
+<body>
+  <%- include("partials/navbar") %>
 
     <main>
-        <section id="projetos">
-            <p class="seção-texto-p1">Navegue em Meus Recentes</p>
-            <h1 class="título">Projetos</h1>
-            <div class="habilidade-detalhes-container">
-              <div class="sobre-containers">
-      
-                <% projetos.forEach(proj => { %>
-                  <div class="detalhes-container color-container">
-                    <div class="article-container">
-                      <img src="<%= proj.imagem %>" alt="<%= proj.titulo %>" class="projeto-img">
-                    </div>
-                    <h2 class="habilidade-sub-título projeto-título"><%= proj.titulo %></h2>
-                    <p class="seção-texto-p1 seção-texto-projeto"><%- proj.descricao %></p>
-                    <div class="btn-container">
-                      <button class="btn btn-color-2" onclick="location.href='<%= proj.github %>'">GitHub</button>
-                      <button class="btn btn-color-2" onclick="location.href='<%= proj.demo %>'">Live Demo</button>
-                    </div>
-                  </div>
-                <% }) %>
-      
+      <section id="projetos">
+        <p class="seção-texto-p1">Navegue em Meus Recentes</p>
+        <h1 class="título">Projetos</h1>
+        <div class="habilidade-detalhes-container">
+          <div class="sobre-containers">
+
+            <% projetos.forEach(proj=> { %>
+              <div class="detalhes-container color-container">
+                <div class="article-container">
+                  <% if (proj.proj_imagem) { %>
+                    <img src="<%= proj.proj_imagem %>" alt="<%= proj.proj_titulo %>" class="projeto-img">
+                  <% } else { %>
+                    <img src="/assets/default-project.png" alt="Imagem padrão" class="projeto-img">
+                  <% } %>
+                </div>
+                <h2 class="habilidade-sub-título projeto-título">
+                  <%= proj.proj_titulo %>
+                </h2>
+                <p class="seção-texto-p1 seção-texto-projeto"><%- proj.proj_descricao %></p>
+                <div class="btn-container">
+                  <% if (proj.proj_github) { %>
+                    <button class="btn btn-color-2" onclick="window.open('<%= proj.proj_github %>', '_blank')">GitHub</button>
+                    <% } %>
+                  <% if (proj.proj_demo) { %>
+                    <button class="btn btn-color-2" onclick="window.open('<%= proj.proj_demo %>', '_blank')">Live Demo</button>
+                  <% } %>
+                </div>
               </div>
-            </div>
-          </section>
+              <% }) %>
+          </div>
+        </div>
+      </section>
     </main>
-  </body>
+</body>
+
 </html>
